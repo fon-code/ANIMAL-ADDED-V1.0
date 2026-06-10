@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-en: "JetBrains Mono", monospace;
+  --font-th: "Noto Sans Thai", sans-serif;
+  --font-system: "JetBrains Mono", "Noto Sans Thai", sans-serif;
+  --color-primary: #111f42;
+  --color-accent: #E3624A;
+}
+
+@layer base {
+  /* บังคับใช้ฟอนต์กับทุก Tag ในระบบ */
+  * {
+    font-family: var(--font-system);
+  }
+  
+  span, input, td, th, div, p, button, select, textarea, modal, table {
+    font-family: var(--font-system);
+  }
+}
+
+@layer components {
+  /* =========================================================================
+     GLOBAL DESIGN SYSTEM / THEME CONFIGURATION
+     ** แก้ไขที่นี่ที่เดียว จะมีผลกับทุกหน้าในระบบ **
+  ========================================================================= */
+
+  /* ----- 1. TYPOGRAPHY (ฟอนต์และตัวหนังสือ) ----- */
+  
+  /* หัวข้อหน้าเพจหลัก (Header) */
+  .sys-title-main { @apply text-[20px] md:text-[24px] font-black text-primary tracking-tight leading-none; }
+  /* คำอธิบายใต้หัวข้อหน้าเพจ */
+  .sys-title-sub  { @apply text-[10px] md:text-[11px] font-medium text-slate-500 mt-0.5; }
+
+  /* ไอคอนประจำหน้าใน Header (ปรับขนาดให้พอดีกับ 2 แถว: Title + Sub) */
+  .sys-header-icon-box { @apply w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-100 shrink-0; }
+  .sys-header-icon { @apply w-5 h-5 md:w-6 md:h-6 text-primary; }
+
+  /* ฟอนต์ในตาราง (Data Table) */
+  /* สีพื้นหลังหัวตารางและเส้นใต้ขอบ */
+  .sys-table-header { @apply bg-primary border-b-2 border-primary; }
+  /* ฟอนต์หัวตาราง */
+  .sys-table-th { @apply text-[9px] md:text-[10px] font-black text-white uppercase tracking-widest; }
+  /* เนื้อหาในตาราง */
+  .sys-table-td { @apply text-[10px] md:text-[11px] font-medium text-slate-600; }
+
+  /* ฟอนต์ของ KPI Cards */
+  /* ตัวเลขหลัก */
+  .sys-kpi-value { @apply text-2xl md:text-3xl font-black text-primary font-mono tracking-tighter leading-none; }
+  /* ข้อความกำกับหัวข้อ */
+  .sys-kpi-label { @apply text-[12px] font-black text-primary uppercase tracking-widest leading-tight; }
+  /* คำอธิบายรองใน KPI */
+  .sys-kpi-desc  { @apply text-[11px] font-medium text-slate-400 mt-2; }
+
+  /* ฟอนต์แบบซ้อนกัน (Stack) เช่น ชื่อและตำแหน่ง */
+  .sys-stack-main { @apply text-[11px] font-black text-primary uppercase tracking-wider; }
+  .sys-stack-sub  { @apply text-[11px] font-medium text-slate-400 uppercase tracking-widest mt-0.5; }
+
+  /* ข้อความขนาดเล็กมาก */
+  .sys-label-tiny { @apply text-[9px] font-black uppercase tracking-widest text-slate-400; }
+
+
+  /* ----- 2. LAYOUTS & CONTAINERS (เลย์เอาต์และระยะห่าง) ----- */
+  
+  /* กรอบของหน้าเพจโดยรวม - ขยายเต็มพื้นที่ (Full Responsive 100%), ปรับระยะห่าง GapHeader: pt-2 */
+  .sys-page-layout { @apply w-full mx-auto px-4 md:px-8 pt-2 space-y-4; }
+  
+  /* เนื้อหาหลักด้านล่าง Header */
+  .sys-main-content { @apply pt-2 space-y-3 md:space-y-4; }
+
+  /* กรอบ Card พื้นฐานสีขาว - KPI Cards สูงเต็ม h-full */
+  .sys-card-base { @apply bg-white p-4 md:p-6 rounded-[20px] md:rounded-[24px] shadow-sm border border-slate-100 h-full pt-2; }
+  
+  /* กรอบ Card สำหรับครอบตาราง - ขอบเหลี่ยม (rounded-none) */
+  .sys-table-card { @apply bg-white rounded-none border border-slate-200 shadow-sm overflow-hidden; }
+  
+  /* กรอบ Card สำหรับปฏิทิน - ขอบเหลี่ยม (rounded-none) */
+  .sys-calendar-card { @apply bg-white rounded-none border border-slate-200 shadow-sm overflow-hidden; }
+
+
+  /* ----- 3. PAGINATION (ระบบแบ่งหน้าตาราง) ----- */
+  .sys-pagination-container { @apply flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-white border-t border-slate-200 w-full; }
+  .sys-pagination-text { @apply text-[11px] font-black text-primary font-mono uppercase tracking-widest leading-none; }
+  .sys-pagination-select { @apply text-[11px] font-black text-primary font-mono bg-white border border-slate-200 rounded-xl px-2 py-1 outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer hover:bg-slate-50 transition-all; }
+  .sys-pagination-btn { @apply flex items-center justify-center p-2 rounded-xl border border-slate-200 bg-white text-primary hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all; }
+
+
+  /* ----- 4. BUTTONS, INPUTS & BADGES (ปุ่มและฟอนต์) ----- */
+  .sys-btn-primary { @apply flex items-center justify-center gap-2 bg-primary text-white py-3 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all disabled:opacity-50; }
+  .sys-btn-secondary { @apply flex items-center justify-center gap-2 bg-slate-100 text-primary py-3 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all disabled:opacity-50; }
+  .sys-input { @apply bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:ring-2 focus:ring-primary outline-none placeholder:text-slate-300 transition-all; }
+  
+  /* Badge / Chip */
+  .sys-badge { @apply px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border; }
+  
+  /* Tabs */
+  .sys-tab-btn { @apply px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all; }
+  .sys-tab-active { @apply bg-primary text-white shadow-lg shadow-primary/20; }
+  .sys-tab-inactive { @apply bg-white text-slate-400 hover:bg-slate-50; }
+
+  /* Toggle Switch */
+  .sys-toggle-base { @apply relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2; }
+  .sys-toggle-circle { @apply pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out; }
+
+  /* Utility Shadows */
+  .shadow-soft { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04); }
+
+  /* ปุ่มในคอลัมน์ Action */
+  .sys-btn-action { @apply w-8 h-8 flex items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-500 transition-all; }
+  .sys-action-gap { @apply gap-1; }
+
+  /* ----- 5. SIDEBAR (ระบบเมนูด้านข้าง) ----- */
+  /* เมนูหลัก (Main Navigation Items) */
+  .sys-nav-item { @apply w-full flex items-center py-3 text-sm font-medium uppercase tracking-wide transition-all duration-500; }
+  .sys-nav-item:hover { @apply font-semibold bg-white/5; }
+  .sys-nav-item-active { @apply font-bold; background: linear-gradient(90deg, #4F868C, #186B8C); }
+  
+  /* ช่องสำหรับสีข้อความเมนูหลัก */
+  .sys-nav-label { @apply transition-colors duration-300; }
+
+  /* ไอคอนเมนูหลัก */
+  .sys-nav-icon { @apply transition-all duration-300 shrink-0; width: 20px; height: 20px; }
+
+  /* เมนูย่อย (Sub-Items / Dropdown) */
+  .sys-sub-item { @apply w-full flex items-center py-2 px-4 text-[11px] font-medium uppercase transition-all duration-300; }
+  .sys-sub-item:hover { @apply bg-white/5 font-semibold; }
+  .sys-sub-item-active { @apply font-bold text-white; background: linear-gradient(90deg, #4F868C, #186B8C); }
+
+  /* สัญลักษณ์นำหน้าเมนูย่อย */
+  .sys-sub-bullet { @apply w-1.5 h-1.5 rounded-full bg-current mr-2; }
+  
+  /* การจัดวางและเส้นกั้นแนวตั้งเเชื่อมเมนูย่อย */
+  .sys-sub-container { @apply border-l-2 border-slate-700/30 ml-4 pl-2 space-y-0.5; }
+
+  /* Shimmer Effect Keyframes */
+  @keyframes sys-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .sys-animate-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .sys-animate-shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: sys-shimmer 2s infinite;
+  }
+}
+
+body {
+  font-family: var(--font-system);
+  @apply text-slate-800 bg-slate-50 min-h-screen relative;
+}
